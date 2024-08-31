@@ -12,3 +12,4 @@ c:\Users\Tim\Documents\Visual Studio\Kadda\kaddac\obj\Debug\net8.0\refint\kaddac
 c:\Users\Tim\Documents\Visual Studio\Kadda\kaddac\obj\Debug\net8.0\kaddac.pdb
 c:\Users\Tim\Documents\Visual Studio\Kadda\kaddac\obj\Debug\net8.0\kaddac.genruntimeconfig.cache
 c:\Users\Tim\Documents\Visual Studio\Kadda\kaddac\obj\Debug\net8.0\ref\kaddac.dll
+c:\Users\Tim\Documents\Visual Studio\Kadda\kaddac\obj\Debug\net8.0\kaddac.sourcelink.json

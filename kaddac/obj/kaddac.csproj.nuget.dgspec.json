@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {}
+    "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {
+    "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
+        "projectUniqueName": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
         "projectName": "kaddac",
-        "projectPath": "C:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
+        "projectPath": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
         "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\obj\\",
+        "outputPath": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tim\\AppData\\Roaming\\NuGet\\NuGet.Config",

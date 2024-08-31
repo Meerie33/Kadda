@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace kaddac
 {
@@ -9,24 +10,43 @@ namespace kaddac
         {
             while(true)
             {
-                var line = Console.ReadLine();
                 Console.Write(">> ");
+                var line = Console.ReadLine();
 
                 if(string.IsNullOrWhiteSpace(line))
                     return;
 
                 var parser = new Parser(line);
-                var expression = parser.Parse();
+                var syntaxTree = parser.Parse();
 
                 var color = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                PrettyPrint(expression);
+                PrettyPrint(syntaxTree.Root);
                 Console.ForegroundColor = color;
+
+                // Error found
+                if(syntaxTree.Diagnostics.Any())
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    foreach(var diagnostics in parser.Diagnostics)
+                        Console.WriteLine(diagnostics);
+                    
+                    Console.ForegroundColor = color;                   
+                }
             }
         }   
 
-        static void PrettyPrint(SyntaxNode node, string indend = "")
+        static void PrettyPrint(SyntaxNode node, string indend = "", bool isLast = true)
         {
+            // Unix Tree
+            // 
+            // └──
+            // │ 
+            // ├── 
+
+            var marker = isLast ? "└──" : "├──";
+            Console.Write(indend);
+            Console.Write(marker);
             Console.Write(node.Kind);
 
             if(node is SyntaxToken t && t.Value != null)
@@ -37,12 +57,12 @@ namespace kaddac
 
             Console.WriteLine();
 
-            indend += "    ";
+            indend += isLast ? "    " : "│   ";
+
+            var lastChild = node.GetChildren().LastOrDefault();
 
             foreach(var child in node.GetChildren())
-            {
-                PrettyPrint(child, indend);
-            }
+                PrettyPrint(child, indend, child == lastChild);
         }
     }
 
@@ -86,15 +106,15 @@ namespace kaddac
     // Alexa, schalte Sofa an
     class Alexa
     {
-
         private readonly string _text;
         private int _position;
+        private List<string> _diagnostigs = new List<string>();
 
         public Alexa(string text)
         {        
             _text = text;    
         }
-
+        public IEnumerable<string> Diagnostics => _diagnostigs;
         private char Current 
         {
             get
@@ -142,24 +162,28 @@ namespace kaddac
 
                 var lenght = _position - start;
                 var text = _text.Substring(start, lenght);
-                //int.TryParse(text, out var value);
+                if(!int.TryParse(text, out var value))
+                {
+                    _diagnostigs.Add($"ERROR: The number {_text} isnt a valid int32");
+                }
+                
                 return new SyntaxToken(SyntaxKind.WhitespaceToken, start, text, null);
             }
 
             if(Current == '+')
-            return new SyntaxToken(SyntaxKind.PlusToken, _position++,"+", null);
+                return new SyntaxToken(SyntaxKind.PlusToken, _position++,"+", null);
             else if(Current == '-')
-            return new SyntaxToken(SyntaxKind.MinusToken, _position++,"-", null);
+                return new SyntaxToken(SyntaxKind.MinusToken, _position++,"-", null);
             else if(Current == '(')
-            return new SyntaxToken(SyntaxKind.OpenParenthesisToken, _position++,"(", null);
+                return new SyntaxToken(SyntaxKind.OpenParenthesisToken, _position++,"(", null);
             else if(Current == ')')
-            return new SyntaxToken(SyntaxKind.CloseParenthesisToken, _position++,")", null);
+                return new SyntaxToken(SyntaxKind.CloseParenthesisToken, _position++,")", null);
             else if(Current == '*')
-            return new SyntaxToken(SyntaxKind.StarToken, _position++,"*", null);
+                return new SyntaxToken(SyntaxKind.StarToken, _position++,"*", null);
             else if(Current == '/')
-            return new SyntaxToken(SyntaxKind.SlashToken, _position++,"/", null);
+                return new SyntaxToken(SyntaxKind.SlashToken, _position++,"/", null);
 
-
+            _diagnostigs.Add($"ERROR: bad character input: '{Current}'");
             return new SyntaxToken(SyntaxKind.BadToken, _position++, _text.Substring(_position -1, 1), null);
         }
     }
@@ -213,10 +237,24 @@ namespace kaddac
         }
     }
 
+    sealed class SyntaxTree
+    {
+        public SyntaxTree(IReadOnlyList<string> diagnostics, ExpressionSyntax root, SyntaxToken endOfFileToken)
+        {
+            Diagnostics = diagnostics.ToArray();
+            Root = root;
+            EndOfFileToken = endOfFileToken;
+        }
+        public IReadOnlyList<string> Diagnostics { get; }
+        public ExpressionSyntax Root { get; }
+        public SyntaxToken EndOfFileToken { get; }
+    }
     class Parser
     {
 
         private readonly SyntaxToken[] _tokens;
+
+        private List<string> _diagnostigs = new List<string>();
         private int _position;
         public Parser(string text)
         {
@@ -235,7 +273,10 @@ namespace kaddac
             while (token.Kind != SyntaxKind.EndOfFileToken);
 
             _tokens = tokens.ToArray();
+            _diagnostigs.AddRange(lexer.Diagnostics);
         }
+
+        public IEnumerable<string> Diagnostics => _diagnostigs;
 
         private SyntaxToken Peek(int offset)
         {
@@ -260,10 +301,18 @@ namespace kaddac
             if(Current.Kind == kind)
             return NextToken();
 
+            _diagnostigs.Add($"ERROR: Scheiß Token '{Current.Kind}', expected <{kind}>");
             return new SyntaxToken(kind, Current.Position, null, null);
         }
 
-        public ExpressionSyntax Parse()
+        public SyntaxTree Parse()
+        {
+            var expression = ParseExpression();
+            var endOfFileToken = Match(SyntaxKind.EndOfFileToken);
+            return new SyntaxTree(_diagnostigs, expression, endOfFileToken);
+        }
+
+        private ExpressionSyntax ParseExpression()
         {
             var left = ParsePrimaryExpression();
 
@@ -282,6 +331,44 @@ namespace kaddac
         {
             var numbertoken = Match(SyntaxKind.NumberToken);
             return new NumberExpressionSyntax(numbertoken);
+        }
+    }
+
+    class Evaluator
+    {
+        private readonly ExpressionSyntax _root;
+        public Evaluator(ExpressionSyntax root)
+        {
+            this._root = root;
+        }
+        public int Evaluate()
+        {
+            return EvaluateExpression(_root);
+        }
+
+        // root = node
+        private int EvaluateExpression(ExpressionSyntax root)
+        {
+            if(root is NumberExpressionSyntax n)
+                return(int) n.NumberToken.Value;
+
+            if(root is BinaryExpressionSyntax b)
+            {
+                var left = EvaluateExpression(b.Left);
+                var right = EvaluateExpression(b.Right);
+
+                if(b.OpperatorToken.Kind == SyntaxKind.PlusToken)
+                    return left + right;
+                else if(b.OpperatorToken.Kind == SyntaxKind.MinusToken)
+                    return left - right;
+                else if(b.OpperatorToken.Kind == SyntaxKind.StarToken)
+                    return left * right;
+                else if(b.OpperatorToken.Kind == SyntaxKind.SlashToken)
+                    return left / right;
+                else
+                throw new Exception($"Unexpected binary operator {b.OpperatorToken.Kind}");
+            }
+            throw new Exception($"Unexpected node {root.Kind}");
         }
     }
 }
