@@ -8,6 +8,7 @@ namespace kaddac
     {
         static void Main(string[] args)
         {
+            bool showTree = false;
             while(true)
             {
                 Console.Write(">> ");
@@ -16,22 +17,43 @@ namespace kaddac
                 if(string.IsNullOrWhiteSpace(line))
                     return;
 
+                if(line == ">showTree")
+                {
+                    showTree = !showTree;
+                    Console.WriteLine(showTree ? "Showing parse trees." : "Not showing parse trees");
+                    continue;
+                }
+                else if(line == ">cls")
+                {
+                    Console.Clear();
+                    continue;
+                }
                 var parser = new Parser(line);
-                var syntaxTree = parser.Parse();
+                var syntaxTree = SyntaxTree.Parse(line);
 
-                var color = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                PrettyPrint(syntaxTree.Root);
-                Console.ForegroundColor = color;
+                if(showTree)
+                {
+                    var color = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    PrettyPrint(syntaxTree.Root);
+                    Console.ForegroundColor = color;
+                }
 
                 // Error found
-                if(syntaxTree.Diagnostics.Any())
+                if(!syntaxTree.Diagnostics.Any())
                 {
+                    var e = new Evaluator(syntaxTree.Root);
+                    var result = e.Evaluate();
+                    Console.WriteLine(result);                 
+                }
+                else
+                {
+                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     foreach(var diagnostics in parser.Diagnostics)
                         Console.WriteLine(diagnostics);
                     
-                    Console.ForegroundColor = color;                   
+                    Console.ForegroundColor = color; 
                 }
             }
         }   
@@ -79,7 +101,8 @@ namespace kaddac
         BadToken,
         EndOfFileToken,
         NumberExpression,
-        BinaryExpression
+        BinaryExpression,
+        ParenthesizedExpression
     }
 
     class SyntaxToken : SyntaxNode
@@ -147,7 +170,10 @@ namespace kaddac
 
                 var lenght = _position - start;
                 var text = _text.Substring(start, lenght);
-                int.TryParse(text, out var value);
+                if(!int.TryParse(text, out var value))
+                {
+                    _diagnostigs.Add($"The number {_text} isnt a valid int32");
+                }
                 return new SyntaxToken(SyntaxKind.NumberToken, start, text, value);
             }
 
@@ -162,10 +188,7 @@ namespace kaddac
 
                 var lenght = _position - start;
                 var text = _text.Substring(start, lenght);
-                if(!int.TryParse(text, out var value))
-                {
-                    _diagnostigs.Add($"ERROR: The number {_text} isnt a valid int32");
-                }
+                // int.TryParse(text, out var value);
                 
                 return new SyntaxToken(SyntaxKind.WhitespaceToken, start, text, null);
             }
@@ -237,6 +260,28 @@ namespace kaddac
         }
     }
 
+    sealed class ParenthesizedExpressionSyntax : ExpressionSyntax
+    {
+        public ParenthesizedExpressionSyntax(SyntaxToken openParenthesisToken, ExpressionSyntax expression, SyntaxToken closedParenthesisToken)
+        {
+            OpenParenthesisToken = openParenthesisToken;
+            Expression = expression;
+            ClosedParenthesisToken = closedParenthesisToken;
+        }
+
+        public override SyntaxKind Kind => SyntaxKind.ParenthesizedExpression;
+
+        public SyntaxToken OpenParenthesisToken { get; }
+        public ExpressionSyntax Expression { get; }
+        public SyntaxToken ClosedParenthesisToken { get; }
+
+        public override IEnumerable<SyntaxNode> GetChildren()
+        {
+            yield return OpenParenthesisToken;
+            yield return Expression;
+            yield return ClosedParenthesisToken;
+        }
+    }
     sealed class SyntaxTree
     {
         public SyntaxTree(IReadOnlyList<string> diagnostics, ExpressionSyntax root, SyntaxToken endOfFileToken)
@@ -248,6 +293,12 @@ namespace kaddac
         public IReadOnlyList<string> Diagnostics { get; }
         public ExpressionSyntax Root { get; }
         public SyntaxToken EndOfFileToken { get; }
+
+        public static SyntaxTree Parse(string text)
+        {
+            var parser = new Parser(text);
+            return parser.Parse();
+        }
     }
     class Parser
     {
@@ -305,18 +356,37 @@ namespace kaddac
             return new SyntaxToken(kind, Current.Position, null, null);
         }
 
+        private ExpressionSyntax ParseExpression()
+        {
+            return ParseTerm();
+        }
         public SyntaxTree Parse()
         {
-            var expression = ParseExpression();
+            var expression = ParseTerm();
             var endOfFileToken = Match(SyntaxKind.EndOfFileToken);
             return new SyntaxTree(_diagnostigs, expression, endOfFileToken);
         }
 
-        private ExpressionSyntax ParseExpression()
+        private ExpressionSyntax ParseTerm()
+        {
+            var left = ParseFactor();
+
+            while(Current.Kind == SyntaxKind.PlusToken || Current.Kind == SyntaxKind.MinusToken)
+            {
+                var opperatorToken = NextToken();
+                var right = ParseFactor();
+                left = new BinaryExpressionSyntax(left, opperatorToken, right);
+
+            }
+
+            return left;
+        }
+
+        private ExpressionSyntax ParseFactor()
         {
             var left = ParsePrimaryExpression();
 
-            while(Current.Kind == SyntaxKind.PlusToken || Current.Kind == SyntaxKind.MinusToken)
+            while(Current.Kind == SyntaxKind.StarToken || Current.Kind == SyntaxKind.SlashToken)
             {
                 var opperatorToken = NextToken();
                 var right = ParsePrimaryExpression();
@@ -329,6 +399,14 @@ namespace kaddac
 
         private ExpressionSyntax ParsePrimaryExpression()
         {
+            if(Current.Kind == SyntaxKind.OpenParenthesisToken)
+            {
+                var left = NextToken();
+                var expression = ParseExpression();
+                var right = Match(SyntaxKind.CloseParenthesisToken);
+                return new ParenthesizedExpressionSyntax(left, expression, right);
+            }
+
             var numbertoken = Match(SyntaxKind.NumberToken);
             return new NumberExpressionSyntax(numbertoken);
         }
@@ -346,13 +424,12 @@ namespace kaddac
             return EvaluateExpression(_root);
         }
 
-        // root = node
-        private int EvaluateExpression(ExpressionSyntax root)
+        private int EvaluateExpression(ExpressionSyntax node)
         {
-            if(root is NumberExpressionSyntax n)
+            if(node is NumberExpressionSyntax n)
                 return(int) n.NumberToken.Value;
 
-            if(root is BinaryExpressionSyntax b)
+            if(node is BinaryExpressionSyntax b)
             {
                 var left = EvaluateExpression(b.Left);
                 var right = EvaluateExpression(b.Right);
@@ -366,9 +443,13 @@ namespace kaddac
                 else if(b.OpperatorToken.Kind == SyntaxKind.SlashToken)
                     return left / right;
                 else
-                throw new Exception($"Unexpected binary operator {b.OpperatorToken.Kind}");
+                    throw new Exception($"Unexpected binary operator {b.OpperatorToken.Kind}");
             }
-            throw new Exception($"Unexpected node {root.Kind}");
+
+            if(node is ParenthesizedExpressionSyntax p)
+                return EvaluateExpression(p.Expression);
+            
+            throw new Exception($"Unexpected node {node.Kind}");
         }
     }
 }
