@@ -16,6 +16,7 @@ namespace Kadda.CodeAnalysis
 
         // Expressions 
         LiteralExpression,
+        UnaryExpression,
         BinaryExpression,
         ParenthesizedExpression
     }

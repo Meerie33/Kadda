@@ -21,6 +21,18 @@ namespace Kadda.CodeAnalysis
             if(node is LiteralExpressionSyntax n)
                 return(int) n.LiteralToken.Value;
 
+            if(node is UnaryExpressionSyntax u)
+            {
+                var operand = EvaluateExpression(u.Operand);
+
+                if(u.OpperatorToken.Kind == SyntaxKind.PlusToken)
+                    return operand;         
+                else if(u.OpperatorToken.Kind == SyntaxKind.MinusToken)
+                    return -operand;
+                else
+                    throw new Exception($"Unexpected unary operator {u.OpperatorToken.Kind}");
+            }
+
             if(node is BinaryExpressionSyntax b)
             {
                 var left = EvaluateExpression(b.Left);
