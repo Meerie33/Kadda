@@ -1,18 +1,21 @@
 namespace Kadda.CodeAnalysis
 {
-    enum SyntaxKind
+    public enum SyntaxKind
     {
-        NumberToken,
-        WhitespaceToken,
-        PlusToken,
-        MinusToken,
-        OpenParenthesisToken,
-        CloseParenthesisToken,
-        StarToken,
-        SlashToken,
+        // Tokens
         BadToken,
         EndOfFileToken,
-        NumberExpression,
+        WhitespaceToken,
+        NumberToken,
+        PlusToken,
+        MinusToken,
+        StarToken,
+        SlashToken,
+        OpenParenthesisToken,
+        CloseParenthesisToken,
+
+        // Expressions 
+        LiteralExpression,
         BinaryExpression,
         ParenthesizedExpression
     }

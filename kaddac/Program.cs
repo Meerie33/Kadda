@@ -5,11 +5,11 @@ using Kadda.CodeAnalysis;
 
 namespace Kadda
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            bool showTree = false;
+            var showTree = false;
             while(true)
             {
                 Console.Write(">> ");
@@ -34,10 +34,9 @@ namespace Kadda
 
                 if(showTree)
                 {
-                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     PrettyPrint(syntaxTree.Root);
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
 
                 // Error found
@@ -49,12 +48,11 @@ namespace Kadda
                 }
                 else
                 {
-                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     foreach(var diagnostics in parser.Diagnostics)
                         Console.WriteLine(diagnostics);
                     
-                    Console.ForegroundColor = color; 
+                    Console.ResetColor(); 
                 }
             }
         }   
@@ -80,7 +78,7 @@ namespace Kadda
 
             Console.WriteLine();
 
-            indend += isLast ? "    " : "│   ";
+            indend += isLast ? "   " : "│  ";
 
             var lastChild = node.GetChildren().LastOrDefault();
 
