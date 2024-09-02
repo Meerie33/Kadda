@@ -13,6 +13,11 @@ namespace Kadda.CodeAnalysis.Syntax
         SlashToken,
         OpenParenthesisToken,
         CloseParenthesisToken,
+        IndentifierToken,
+
+        //Keyword
+        TrueKeyword,
+        FalseKeyword,
 
         // Expressions 
         LiteralExpression,

@@ -67,6 +67,24 @@ namespace Kadda.CodeAnalysis.Syntax
                 return new SyntaxToken(SyntaxKind.WhitespaceToken, start, text, null);
             }
 
+            // booleans -- true
+            if(char.IsLetter(Current))
+            {
+                var start = _position;
+
+                while(char.IsLetter(Current))
+                {
+                    Next();
+                }
+
+                var lenght = _position - start;
+                var text = _text.Substring(start, lenght);
+                var kind = SyntaxFacts.GetKeywordKind(text);
+                
+                return new SyntaxToken(kind, start, text, null);
+            }
+            // false
+
             switch (Current)
             {
                 case '+':

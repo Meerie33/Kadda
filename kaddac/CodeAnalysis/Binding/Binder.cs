@@ -4,75 +4,6 @@ using Kadda.CodeAnalysis.Syntax;
 
 namespace Kadda.Binding
 {
-    internal enum BoundNodeKind
-    {
-        UnaryExpression,
-        LiteralExpression
-    }
-    
-    internal abstract class BoundNode
-    {
-        public abstract BoundNodeKind Kind { get; }
-    }
-
-    internal abstract class BoundExpression : BoundNode
-    {
-        public abstract Type Type { get; }
-    }
-
-    internal sealed class BoundLiteralExpression : BoundExpression
-    {
-        public BoundLiteralExpression(object value)
-        {
-            Value = value;
-        }
-        public override BoundNodeKind Kind => BoundNodeKind.LiteralExpression;
-        public override Type Type => Value.GetType();
-        public object Value { get; }
-    }
-
-    internal enum BoundUnaryOperatorKind
-    {
-        Identity,
-        Negation
-    }
-    internal sealed class BoundUnaryExpression : BoundExpression
-    {
-        public BoundUnaryExpression(BoundUnaryOperatorKind opertorKind, BoundExpression operand)
-        {
-            OpertorKind = opertorKind;
-            Operand = operand;
-        }
-        public override Type Type => Operand.Type;
-        public override BoundNodeKind Kind => BoundNodeKind.UnaryExpression;
-        public BoundUnaryOperatorKind OpertorKind { get; }
-        public BoundExpression Operand { get; }
-    }
-
-    internal enum BoundBinaryOperatorKind
-    {
-        Addition,
-        Substraction,
-        Mulitplication,
-        Division
-    }
-
-    internal sealed class BoundBinaryExpression : BoundExpression
-    {
-        public BoundBinaryExpression(BoundExpression left, BoundBinaryOperatorKind opertorKind, BoundExpression right)
-        {
-            Left = left;
-            OpertorKind = opertorKind;
-            Right = right;
-        }
-        public override BoundNodeKind Kind => BoundNodeKind.UnaryExpression;
-        public override Type Type => Left.Type;
-
-        public BoundExpression Left { get; }
-        public BoundBinaryOperatorKind OpertorKind { get; }
-        public BoundExpression Right { get; }
-    }
-
     internal sealed class Binder
     {
         private readonly List<string> _diagnostics = new List<string>();
@@ -94,7 +25,8 @@ namespace Kadda.Binding
         }
         private BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
         {
-            var value = syntax.LiteralToken.Value as int? ?? 0;
+
+            var value = syntax.Value ?? 0;
             return new BoundLiteralExpression(value);
         }
         private BoundExpression BindUnaryExpression(UnaryExpressionSyntax syntax)
