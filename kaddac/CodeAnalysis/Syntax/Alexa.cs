@@ -1,4 +1,4 @@
-namespace Kadda.CodeAnalysis
+namespace Kadda.CodeAnalysis.Syntax
 {
     // Alexa, schalte Sofa an
     internal sealed class Alexa

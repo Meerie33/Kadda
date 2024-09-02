@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Kadda.CodeAnalysis
+namespace Kadda.CodeAnalysis.Syntax
 {
     internal sealed class Parser
     {
