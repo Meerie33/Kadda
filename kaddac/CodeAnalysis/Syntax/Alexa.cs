@@ -5,13 +5,13 @@ namespace Kadda.CodeAnalysis.Syntax
     {
         private readonly string _text;
         private int _position;
-        private List<string> _diagnostigs = new List<string>();
+        private List<string> _diagnostics = new List<string>();
+        public IEnumerable<string> Diagnostics => _diagnostics;
 
         public Alexa(string text)
         {        
             _text = text;    
         }
-        public IEnumerable<string> Diagnostics => _diagnostigs;
         private char Current 
         {
             get
@@ -46,7 +46,7 @@ namespace Kadda.CodeAnalysis.Syntax
                 var text = _text.Substring(start, lenght);
                 if(!int.TryParse(text, out var value))
                 {
-                    _diagnostigs.Add($"The number {_text} isnt a valid int32");
+                    _diagnostics.Add($"The number {_text} isnt a valid int32");
                 }
                 return new SyntaxToken(SyntaxKind.NumberToken, start, text, value);
             }
@@ -101,7 +101,7 @@ namespace Kadda.CodeAnalysis.Syntax
                     return new SyntaxToken(SyntaxKind.SlashToken, _position++, "/", null);
             }
 
-            _diagnostigs.Add($"ERROR: bad character input: '{Current}'");
+            _diagnostics.Add($"ERROR: bad character input: '{Current}'");
             return new SyntaxToken(SyntaxKind.BadToken, _position++, _text.Substring(_position -1, 1), null);
         }
     }

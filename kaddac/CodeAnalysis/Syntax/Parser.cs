@@ -5,8 +5,8 @@ namespace Kadda.CodeAnalysis.Syntax
     internal sealed class Parser
     {
         private readonly SyntaxToken[] _tokens;
-
-        private List<string> _diagnostigs = new List<string>();
+        private List<string> _diagnostics = new List<string>();
+        public IEnumerable<string> Diagnostics => _diagnostics;
         private int _position;
         public Parser(string text)
         {
@@ -25,10 +25,8 @@ namespace Kadda.CodeAnalysis.Syntax
             while (token.Kind != SyntaxKind.EndOfFileToken);
 
             _tokens = tokens.ToArray();
-            _diagnostigs.AddRange(lexer.Diagnostics);
+            _diagnostics.AddRange(lexer.Diagnostics);
         }
-
-        public IEnumerable<string> Diagnostics => _diagnostigs;
 
         private SyntaxToken Peek(int offset)
         {
@@ -53,7 +51,7 @@ namespace Kadda.CodeAnalysis.Syntax
             if(Current.Kind == kind)
             return NextToken();
 
-            _diagnostigs.Add($"ERROR: Scheiß Token '{Current.Kind}', expected <{kind}>");
+            _diagnostics.Add($"ERROR: Scheiß Token '{Current.Kind}', expected <{kind}>");
             return new SyntaxToken(kind, Current.Position, null, null);
         }
 
@@ -61,7 +59,7 @@ namespace Kadda.CodeAnalysis.Syntax
         {
             var expression = ParseExpression();
             var endOfFileToken = MatchToken(SyntaxKind.EndOfFileToken);
-            return new SyntaxTree(_diagnostigs, expression, endOfFileToken);
+            return new SyntaxTree(_diagnostics, expression, endOfFileToken);
         }
 
         private ExpressionSyntax ParseExpression(int parentPrecedence = 0)

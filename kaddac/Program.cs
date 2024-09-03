@@ -37,7 +37,7 @@ namespace Kadda
 
                 if(showTree)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.DarkGray; 
                     PrettyPrint(syntaxTree.Root);
                     Console.ResetColor();
                 }
@@ -52,10 +52,13 @@ namespace Kadda
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    foreach(var diagnostic in parser.Diagnostics)
-                        Console.WriteLine(diagnostics);
+
+                    foreach(var diagnostic in diagnostics)
+                    {
+                        Console.WriteLine(diagnostic);
+                    }
                     
-                    Console.ResetColor(); 
+                    Console.ResetColor();
                 }
             }
         }   
@@ -78,7 +81,6 @@ namespace Kadda
                 Console.Write("");
                 Console.Write(t.Value);
             }
-
             Console.WriteLine();
 
             indend += isLast ? "   " : "│  ";

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {}
+    "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\kaddac.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj": {
+    "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\kaddac.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
+        "projectUniqueName": "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\kaddac.csproj",
         "projectName": "kaddac",
-        "projectPath": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\kaddac.csproj",
-        "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Tim\\Documents\\Visual Studio\\Kadda\\kaddac\\obj\\",
+        "projectPath": "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\kaddac.csproj",
+        "packagesPath": "C:\\Users\\timwu\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Tim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\timwu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
