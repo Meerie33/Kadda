@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "Lcn5i2Rrl7k=",
+  "dgSpecHash": "LskvGiulmA0=",
   "success": true,
-  "projectFilePath": "c:\\Users\\timwu\\Documents\\VisualStudio\\Kadda\\kaddac\\kaddac.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "projectFilePath": "C:\\Users\\timwu\\source\\repos\\F_Console\\F_Console\\F_Console.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\timwu\\.nuget\\packages\\fsharp.core\\8.0.400\\fsharp.core.8.0.400.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Fehler beim Abrufen von Paketsicherheitsrisikodaten: Der Dienstindex für die Quelle \"https://api.nuget.org/v3/index.json\" konnte nicht geladen werden."
+    }
+  ]
 }
