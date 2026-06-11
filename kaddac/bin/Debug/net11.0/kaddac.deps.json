@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v11.0": {
       "kaddac/1.0.0": {
+        "dependencies": {
+          "Kadda": "1.0.0"
+        },
         "runtime": {
           "kaddac.dll": {}
+        }
+      },
+      "Kadda/1.0.0": {
+        "runtime": {
+          "Kadda.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "kaddac/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Kadda/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

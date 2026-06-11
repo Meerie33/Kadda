@@ -2,9 +2,6 @@ C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\.msCoverageSource
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\CoverletSourceRootsMapping_kaddac.Tests
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\testhost.dll
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\xunit.abstractions.dll
-C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.deps.json
-C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.runtimeconfig.json
-C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.exe
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\testhost.exe
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\xunit.runner.visualstudio.testadapter.dll
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.Tests.deps.json
@@ -88,8 +85,6 @@ C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\zh-Hans\Microsoft
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.dll
-C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\kaddac.pdb
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\kaddac.Tests.csproj.AssemblyReference.cache
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\kaddac.Tests.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\kaddac.Tests.AssemblyInfoInputs.cache
@@ -102,3 +97,5 @@ C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\refint\kaddac.Tes
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\kaddac.Tests.pdb
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\kaddac.Tests.genruntimeconfig.cache
 C:\Users\Tim\source\repos\Kadda\kaddac.Tests\obj\Debug\net11.0\ref\kaddac.Tests.dll
+C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\Kadda.dll
+C:\Users\Tim\source\repos\Kadda\kaddac.Tests\bin\Debug\net11.0\Kadda.pdb

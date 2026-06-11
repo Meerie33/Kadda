@@ -1,5 +1,8 @@
-﻿using Kadda.CodeAnalysis;
-using Kadda.Binding;
+﻿using System;
+using System.Linq;
+
+using Kadda.CodeAnalysis;
+using Kadda.CodeAnalysis.Binding;
 using Kadda.CodeAnalysis.Syntax;
 
 namespace Kadda
@@ -28,12 +31,12 @@ namespace Kadda
                     Console.Clear();
                     continue;
                 }
-                var parser = new Parser(line);
-                var syntaxTree = SyntaxTree.Parse(line);
-                var binder = new Binder();
-                var boundExpression = binder.BindExpression(syntaxTree.Root);
 
-                var diagnostics = syntaxTree.Diagnostics.Concat(binder.Diagnostics).ToArray();
+                var syntaxTree = SyntaxTree.Parse(line);
+                var compilation = new Compilation(syntaxTree);
+                var result = compilation.Evaluate();
+
+                var diagnostics = result.Diagnostics;
 
                 if(showTree)
                 {
@@ -45,9 +48,7 @@ namespace Kadda
                 // Error found
                 if (!diagnostics.Any())
                 {
-                    var e = new Evaluator(boundExpression);
-                    var result = e.Evaluate();
-                    Console.WriteLine(result);                 
+                    Console.WriteLine(result.Value);                 
                 }
                 else
                 {

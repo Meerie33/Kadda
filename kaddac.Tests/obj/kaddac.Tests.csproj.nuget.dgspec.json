@@ -33,8 +33,8 @@
             "framework": "net11.0",
             "targetAlias": "net11.0",
             "projectReferences": {
-              "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj": {
-                "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj"
+              "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {
+                "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj"
               }
             }
           }
@@ -376,14 +376,14 @@
         }
       }
     },
-    "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj": {
+    "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj",
-        "projectName": "kaddac",
-        "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj",
+        "projectUniqueName": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
+        "projectName": "Kadda",
+        "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
         "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\obj\\",
+        "outputPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,12 @@
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.AssemblyInfoInputs.cache
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.AssemblyInfo.cs
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.csproj.CoreCompileInputs.cache
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.sourcelink.json
+C:\Users\Tim\source\repos\Kadda\Kadda\bin\Debug\net11.0\Kadda.deps.json
+C:\Users\Tim\source\repos\Kadda\Kadda\bin\Debug\net11.0\Kadda.dll
+C:\Users\Tim\source\repos\Kadda\Kadda\bin\Debug\net11.0\Kadda.pdb
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.dll
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\refint\Kadda.dll
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\Kadda.pdb
+C:\Users\Tim\source\repos\Kadda\Kadda\obj\Debug\net11.0\ref\Kadda.dll

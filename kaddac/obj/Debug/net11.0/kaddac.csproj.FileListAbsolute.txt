@@ -13,3 +13,7 @@ C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\refint\kaddac.dll
 C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\kaddac.pdb
 C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\kaddac.genruntimeconfig.cache
 C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\ref\kaddac.dll
+C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\kaddac.csproj.AssemblyReference.cache
+C:\Users\Tim\source\repos\Kadda\kaddac\bin\Debug\net11.0\Kadda.dll
+C:\Users\Tim\source\repos\Kadda\kaddac\bin\Debug\net11.0\Kadda.pdb
+C:\Users\Tim\source\repos\Kadda\kaddac\obj\Debug\net11.0\kaddac.csproj.Up2Date

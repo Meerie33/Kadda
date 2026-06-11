@@ -394,14 +394,14 @@
           "build/net8.0/xunit.runner.visualstudio.props": {}
         }
       },
-      "kaddac/1.0.0": {
+      "Kadda/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v11.0",
         "compile": {
-          "bin/placeholder/kaddac.dll": {}
+          "bin/placeholder/Kadda.dll": {}
         },
         "runtime": {
-          "bin/placeholder/kaddac.dll": {}
+          "bin/placeholder/Kadda.dll": {}
         }
       }
     }
@@ -914,17 +914,17 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "kaddac/1.0.0": {
+    "Kadda/1.0.0": {
       "type": "project",
-      "path": "../kaddac/kaddac.csproj",
-      "msbuildProject": "../kaddac/kaddac.csproj"
+      "path": "../Kadda/Kadda.csproj",
+      "msbuildProject": "../Kadda/Kadda.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net11.0": [
+      "Kadda >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.14.1",
       "coverlet.collector >= 6.0.4",
-      "kaddac >= 1.0.0",
       "xunit >= 2.9.3",
       "xunit.runner.visualstudio >= 3.1.4"
     ]
@@ -962,8 +962,8 @@
           "framework": "net11.0",
           "targetAlias": "net11.0",
           "projectReferences": {
-            "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj": {
-              "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\kaddac\\kaddac.csproj"
+            "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {
+              "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj"
             }
           }
         }

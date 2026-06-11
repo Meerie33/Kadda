@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\kaddac\kaddac.csproj" />
+    <ProjectReference Include="..\Kadda\Kadda.csproj" />
   </ItemGroup>
 
 </Project>
