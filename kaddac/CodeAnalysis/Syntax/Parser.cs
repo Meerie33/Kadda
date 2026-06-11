@@ -51,7 +51,7 @@ namespace Kadda.CodeAnalysis.Syntax
             if(Current.Kind == kind)
             return NextToken();
 
-            _diagnostics.Add($"ERROR: Scheiß Token '{Current.Kind}', expected <{kind}>");
+            _diagnostics.Add($"ERROR: Wrong Token '{Current.Kind}', expected <{kind}>");
             return new SyntaxToken(kind, Current.Position, null, null);
         }
 
