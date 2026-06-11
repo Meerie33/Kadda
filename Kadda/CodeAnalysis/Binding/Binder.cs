@@ -6,8 +6,8 @@ namespace Kadda.CodeAnalysis.Binding
 {
     internal sealed class Binder
     {
-        private readonly List<string> _diagnostics = new List<string>();
-        public IEnumerable<string> Diagnostics => _diagnostics;
+        private readonly DiagnosticBag _diagnostics = new DiagnosticBag();
+        public DiagnosticBag Diagnostics => _diagnostics;
         public BoundExpression BindExpression (ExpressionSyntax syntax)
         {
             switch(syntax.Kind)
@@ -18,6 +18,8 @@ namespace Kadda.CodeAnalysis.Binding
                     return BindBinaryExpression((BinaryExpressionSyntax)syntax);
                 case SyntaxKind.LiteralExpression:
                     return BindLiteralExpression((LiteralExpressionSyntax)syntax);
+                case SyntaxKind.ParenthesizedExpression:
+                    return BindExpression(((ParenthesizedExpressionSyntax)syntax).Expression); 
 
                 default:
                     throw new Exception ($"Unexpected syntax {syntax.Kind}");
@@ -36,7 +38,7 @@ namespace Kadda.CodeAnalysis.Binding
 
             if(boundOperatorKind == null)
             {
-                _diagnostics.Add($"Unary oeperator '{syntax.OpperatorToken.Text}' is not defined for type{boundOperant.Type}.");
+                _diagnostics.ReportUndefinedUnaryOperator(syntax.OpperatorToken.Span, syntax.OpperatorToken.Text, boundOperant.Type);
                 return boundOperant;
             }
 
@@ -51,7 +53,7 @@ namespace Kadda.CodeAnalysis.Binding
 
             if(boundOperatorKind == null)
             {
-                _diagnostics.Add($"Binary oeperator '{syntax.OpperatorToken.Text}' is not defined for type {boundLeft.Type} and {boundRight.Type}.");
+                _diagnostics.ReportUndefinedBinaryOperator(syntax.OpperatorToken.Span, syntax.OpperatorToken.Text, boundLeft.Type, boundRight.Type);
                 return boundLeft;
             }
 

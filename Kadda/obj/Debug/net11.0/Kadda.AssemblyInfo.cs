@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Kadda")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12a2886eb785016fcc735df4333610ba20080d87")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a374a2a48058ba01f6180c91298099692989053")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kadda")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Kadda")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

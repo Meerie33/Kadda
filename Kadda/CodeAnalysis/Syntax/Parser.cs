@@ -5,8 +5,8 @@ namespace Kadda.CodeAnalysis.Syntax
     internal sealed class Parser
     {
         private readonly SyntaxToken[] _tokens;
-        private List<string> _diagnostics = new List<string>();
-        public IEnumerable<string> Diagnostics => _diagnostics;
+        private DiagnosticBag _diagnostics = new DiagnosticBag();
+        public IEnumerable<Diagnostic> Diagnostics => _diagnostics;
         private int _position;
         public Parser(string text)
         {
@@ -17,16 +17,18 @@ namespace Kadda.CodeAnalysis.Syntax
             do
             {
                 token = lexer.Alex();
-                if(token.Kind != SyntaxKind.WhitespaceToken  && token.Kind != SyntaxKind.BadToken)
+                if  (token.Kind != SyntaxKind.WhitespaceToken  && 
+                     token.Kind != SyntaxKind.BadToken)
                 {
                     tokens.Add(token);
                 }
-            }
-            while (token.Kind != SyntaxKind.EndOfFileToken);
+            } while (token.Kind != SyntaxKind.EndOfFileToken);
 
             _tokens = tokens.ToArray();
             _diagnostics.AddRange(lexer.Diagnostics);
         }
+
+        //public DiagnosticBag Diagnostics => _diagnostics;
 
         private SyntaxToken Peek(int offset)
         {
@@ -51,7 +53,7 @@ namespace Kadda.CodeAnalysis.Syntax
             if(Current.Kind == kind)
             return NextToken();
 
-            _diagnostics.Add($"ERROR: Wrong Token '{Current.Kind}', expected <{kind}>");
+            _diagnostics.ReportUnexpectedToken(Current.Span, Current.Kind, kind);
             return new SyntaxToken(kind, Current.Position, null, null);
         }
 
@@ -106,8 +108,8 @@ namespace Kadda.CodeAnalysis.Syntax
                 case SyntaxKind.TrueKeyword:
                 {
                     var keywordToken = NextToken();
-                    var value = Current.Kind == SyntaxKind.TrueKeyword;
-                    return new LiteralExpressionSyntax(Current, value);
+                    var value = keywordToken.Kind == SyntaxKind.TrueKeyword;
+                    return new LiteralExpressionSyntax(keywordToken, value);
                 }
 
                 default:
