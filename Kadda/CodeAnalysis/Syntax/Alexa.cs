@@ -13,6 +13,7 @@ namespace Kadda.CodeAnalysis.Syntax
         }
 
         public DiagnosticBag Diagnostics => _diagnostics;
+        private char Lookahead => Peek(1);
 
         private char Current 
         {
@@ -96,28 +97,28 @@ namespace Kadda.CodeAnalysis.Syntax
                 case ')':
                     return new SyntaxToken(SyntaxKind.CloseParenthesisToken, _position++, ")", null);
                 case '&':
-                    if (Peek(1) == '&')
+                    if (Lookahead == '&')
                     {
                         _position += 2;
                         return new SyntaxToken(SyntaxKind.AmpersandAmpersandToken, start, "&&", null);
                     }
                     break;
                 case '|':
-                    if (Peek(1) == '|')
+                    if (Lookahead == '|')
                     {
                         _position += 2;
                         return new SyntaxToken(SyntaxKind.PipePipeToken, start, "||", null);
                     }
                     break;
                 case '=':
-                    if (Peek(1) == '=')
+                    if (Lookahead == '=')
                     {
                         _position += 2;
                         return new SyntaxToken(SyntaxKind.EqualsEqualsToken, start, "==", null);
                     }
                     break;
                 case '!':
-                    if (Peek(1) == '=')
+                    if (Lookahead == '=')
                     {
                         _position += 2;
                         return new SyntaxToken(SyntaxKind.BangEqualsToken, start, "!=", null);

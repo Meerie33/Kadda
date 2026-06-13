@@ -73,12 +73,21 @@ namespace Kadda.CodeAnalysis.Binding
                 }
             }
 
+            if(operandType == typeof(bool))
+            {
+                switch(kind)
+                {
+                    case SyntaxKind.BangToken:
+                        return BoundUnaryOperatorKind.LogicalNegation;
+                }
+            }
+
             return null;
         }
 
         private BoundBinaryOperatorKind? BindBinaryOperatorKind(SyntaxKind kind, Type leftType, Type rightType)
         {
-            if(leftType != typeof(int) || rightType != typeof(int))
+            if(leftType == typeof(int) && rightType == typeof(int))
             {
                 switch(kind)
                 {
@@ -90,15 +99,21 @@ namespace Kadda.CodeAnalysis.Binding
                         return BoundBinaryOperatorKind.Mulitplication;
                     case SyntaxKind.SlashToken:
                         return BoundBinaryOperatorKind.Division;
-
-                    default:
-                        throw new Exception ($"Unexpected unary operator {kind}");
                 }
             }
-            else
+
+            if(leftType == typeof(bool) && rightType == typeof(bool))
             {
-                return null;
+                switch(kind)
+                {
+                    case SyntaxKind.AmpersandAmpersandToken:
+                        return BoundBinaryOperatorKind.LogicalAnd;
+                    case SyntaxKind.PipePipeToken:
+                        return BoundBinaryOperatorKind.LogicalOr;
+                }
             }
+            
+            return null;
         }
     }
 }

@@ -5,6 +5,8 @@ namespace Kadda.CodeAnalysis.Binding
         Addition,
         Substraction,
         Mulitplication,
-        Division
+        Division,
+        LogicalAnd,
+        LogicalOr
     }
 }
