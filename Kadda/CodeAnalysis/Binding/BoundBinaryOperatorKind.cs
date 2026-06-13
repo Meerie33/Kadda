@@ -7,6 +7,8 @@ namespace Kadda.CodeAnalysis.Binding
         Mulitplication,
         Division,
         LogicalAnd,
-        LogicalOr
+        LogicalOr,
+        Equals,
+        NotEquals,
     }
 }

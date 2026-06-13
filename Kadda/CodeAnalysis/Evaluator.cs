@@ -56,6 +56,10 @@ namespace Kadda.CodeAnalysis
                         return (bool) left && (bool) right;
                     case BoundBinaryOperatorKind.LogicalOr:
                         return (bool) left || (bool) right;
+                    case BoundBinaryOperatorKind.Equals:
+                        return Equals(left, right);
+                    case BoundBinaryOperatorKind.NotEquals:
+                        return !Equals(left, right);
                     default:
                         throw new Exception($"Unexpected binary operator {b.Op.Kind}");
                 }
