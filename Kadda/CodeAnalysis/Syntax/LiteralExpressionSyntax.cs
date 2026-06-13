@@ -2,7 +2,8 @@ namespace Kadda.CodeAnalysis.Syntax
 {
     public sealed class LiteralExpressionSyntax : ExpressionSyntax
     {
-        public LiteralExpressionSyntax(SyntaxToken literaltoken) : this(literaltoken, literaltoken.Value)
+        public LiteralExpressionSyntax(SyntaxToken literaltoken) 
+        : this(literaltoken, literaltoken.Value)
         {
         }
         public LiteralExpressionSyntax(SyntaxToken literaltoken, object value)

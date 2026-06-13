@@ -63,38 +63,41 @@ namespace Kadda.CodeAnalysis.Binding
         private BoundUnaryOperatorKind? BindUnaryOperatorKind(SyntaxKind kind, Type operandType)
         {
             if(operandType == typeof(int))
-                return null;
-
-            switch(kind)
             {
-                case SyntaxKind.PlusToken:
-                    return BoundUnaryOperatorKind.Identity;
-                case SyntaxKind.MinusToken:
-                    return BoundUnaryOperatorKind.Negation;
-
-                default:
-                    throw new Exception ($"Unexpected unary operator {kind}");
+                switch(kind)
+                {
+                    case SyntaxKind.PlusToken:
+                        return BoundUnaryOperatorKind.Identity;
+                    case SyntaxKind.MinusToken:
+                        return BoundUnaryOperatorKind.Negation;
+                }
             }
+
+            return null;
         }
 
         private BoundBinaryOperatorKind? BindBinaryOperatorKind(SyntaxKind kind, Type leftType, Type rightType)
         {
             if(leftType != typeof(int) || rightType != typeof(int))
-                return null;
-            
-            switch(kind)
             {
-                case SyntaxKind.PlusToken:
-                    return BoundBinaryOperatorKind.Addition;
-                case SyntaxKind.MinusToken:
-                    return BoundBinaryOperatorKind.Substraction;
-                case SyntaxKind.StarToken:
-                    return BoundBinaryOperatorKind.Mulitplication;
-                case SyntaxKind.SlashToken:
-                    return BoundBinaryOperatorKind.Division;
+                switch(kind)
+                {
+                    case SyntaxKind.PlusToken:
+                        return BoundBinaryOperatorKind.Addition;
+                    case SyntaxKind.MinusToken:
+                        return BoundBinaryOperatorKind.Substraction;
+                    case SyntaxKind.StarToken:
+                        return BoundBinaryOperatorKind.Mulitplication;
+                    case SyntaxKind.SlashToken:
+                        return BoundBinaryOperatorKind.Division;
 
-                default:
-                    throw new Exception ($"Unexpected unary operator {kind}");
+                    default:
+                        throw new Exception ($"Unexpected unary operator {kind}");
+                }
+            }
+            else
+            {
+                return null;
             }
         }
     }
