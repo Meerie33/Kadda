@@ -24,7 +24,7 @@ namespace Kadda.CodeAnalysis
             {
                 var operand = EvaluateExpression(u.Operand);
 
-                switch (u.OpertorKind)
+                switch (u.Op.Kind)
                 {
                     case BoundUnaryOperatorKind.Identity:
                         return (int) operand;
@@ -33,7 +33,7 @@ namespace Kadda.CodeAnalysis
                     case BoundUnaryOperatorKind.LogicalNegation:
                         return !(bool) operand;
                     default:
-                        throw new Exception($"Unexpected unary operator {u.OpertorKind}");
+                        throw new Exception($"Unexpected unary operator {u.Op.Kind}");
                 }
             }
 
@@ -42,7 +42,7 @@ namespace Kadda.CodeAnalysis
                 var left = EvaluateExpression(b.Left);
                 var right = EvaluateExpression(b.Right);
 
-                switch (b.OpertorKind)
+                switch (b.Op.Kind)
                 {
                     case BoundBinaryOperatorKind.Addition:
                         return (int) left + (int) right;
@@ -57,7 +57,7 @@ namespace Kadda.CodeAnalysis
                     case BoundBinaryOperatorKind.LogicalOr:
                         return (bool) left || (bool) right;
                     default:
-                        throw new Exception($"Unexpected binary operator {b.OpertorKind}");
+                        throw new Exception($"Unexpected binary operator {b.Op.Kind}");
                 }
             }
 

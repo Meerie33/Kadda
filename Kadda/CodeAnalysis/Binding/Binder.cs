@@ -34,32 +34,32 @@ namespace Kadda.CodeAnalysis.Binding
         private BoundExpression BindUnaryExpression(UnaryExpressionSyntax syntax)
         {
             var boundOperant = BindExpression(syntax.Operand);
-            var boundOperatorKind = BindUnaryOperatorKind(syntax.OpperatorToken.Kind, boundOperant.Type);
+            var boundOperator = BoundUnaryOperator.Bind(syntax.OpperatorToken.Kind, boundOperant.Type);
 
-            if(boundOperatorKind == null)
+            if(boundOperator == null)
             {
                 _diagnostics.ReportUndefinedUnaryOperator(syntax.OpperatorToken.Span, syntax.OpperatorToken.Text, boundOperant.Type);
                 return boundOperant;
             }
 
-            return new BoundUnaryExpression(boundOperatorKind.Value, boundOperant);
+            return new BoundUnaryExpression(boundOperator, boundOperant);
         }
 
         private BoundExpression BindBinaryExpression(BinaryExpressionSyntax syntax)
         {
             var boundLeft = BindExpression(syntax.Left);
             var boundRight = BindExpression(syntax.Right);
-            var boundOperatorKind = BindBinaryOperatorKind(syntax.OpperatorToken.Kind, boundLeft.Type, boundRight.Type);
+            var boundOperator = BoundBinaryOperator.Bind(syntax.OpperatorToken.Kind, boundLeft.Type, boundRight.Type);
 
-            if(boundOperatorKind == null)
+            if(boundOperator == null)
             {
                 _diagnostics.ReportUndefinedBinaryOperator(syntax.OpperatorToken.Span, syntax.OpperatorToken.Text, boundLeft.Type, boundRight.Type);
                 return boundLeft;
             }
 
-            return new BoundBinaryExpression(boundLeft, boundOperatorKind.Value, boundRight);
+            return new BoundBinaryExpression(boundLeft, boundOperator, boundRight);
         }
-
+        /*
         private BoundUnaryOperatorKind? BindUnaryOperatorKind(SyntaxKind kind, Type operandType)
         {
             if(operandType == typeof(int))
@@ -115,5 +115,6 @@ namespace Kadda.CodeAnalysis.Binding
             
             return null;
         }
+        */
     }
 }
