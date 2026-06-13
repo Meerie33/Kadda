@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("kaddac")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a374a2a48058ba01f6180c91298099692989053")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7461a8cb9e2faebaeda6889bdccc8bf3f27bfbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("kaddac")]
 [assembly: System.Reflection.AssemblyTitleAttribute("kaddac")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {}
+    "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {
+    "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
+        "projectUniqueName": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
         "projectName": "Kadda",
-        "projectPath": "c:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
+        "projectPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\Kadda.csproj",
         "packagesPath": "C:\\Users\\Tim\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\obj\\",
+        "outputPath": "C:\\Users\\Tim\\source\\repos\\Kadda\\Kadda\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
