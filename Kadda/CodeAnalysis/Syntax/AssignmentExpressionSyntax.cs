@@ -1,8 +1,8 @@
 namespace Kadda.CodeAnalysis.Syntax
 {
-    public sealed class AssignmentExressionSyntax : ExpressionSyntax
+    public sealed class AssignmentExpressionSyntax : ExpressionSyntax
     {
-        public AssignmentExressionSyntax(SyntaxToken identifierToken, SyntaxToken equalsToken, ExpressionSyntax expression)
+        public AssignmentExpressionSyntax(SyntaxToken identifierToken, SyntaxToken equalsToken, ExpressionSyntax expression)
         {
             IdentifierToken = identifierToken;
             EqualsToken = equalsToken;

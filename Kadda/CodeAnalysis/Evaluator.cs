@@ -5,10 +5,12 @@ namespace Kadda.CodeAnalysis
 {
     internal sealed class Evaluator
     {
-        private readonly BoundExpression _root;
-        public Evaluator(BoundExpression root)
+         private readonly BoundExpression _root;
+        private readonly Dictionary<string, object> _variables;       
+        public Evaluator(BoundExpression root, Dictionary<string, object> variables)
         {
             _root = root;
+            _variables = variables;
         }
         public object Evaluate()
         {
@@ -19,6 +21,16 @@ namespace Kadda.CodeAnalysis
         {
             if(node is BoundLiteralExpression n)
                 return n.Value;
+
+            if(node is BoundVariableExpression v)
+                return _variables[v.Name]; 
+
+            if(node is BoundAssignmentExpression a)
+            {
+                var value = EvaluateExpression(a.Expression);
+                _variables[a.Name] = value;
+                return value;
+            }
 
             if(node is BoundUnaryExpression u)
             {

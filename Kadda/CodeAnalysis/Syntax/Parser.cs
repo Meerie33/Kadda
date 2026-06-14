@@ -28,8 +28,6 @@ namespace Kadda.CodeAnalysis.Syntax
             _diagnostics.AddRange(lexer.Diagnostics);
         }
 
-        //public DiagnosticBag Diagnostics => _diagnostics;
-
         private SyntaxToken Peek(int offset)
         {
             var index = _position + offset;
@@ -63,7 +61,18 @@ namespace Kadda.CodeAnalysis.Syntax
             var endOfFileToken = MatchToken(SyntaxKind.EndOfFileToken);
             return new SyntaxTree(_diagnostics, expression, endOfFileToken);
         }
-
+/*
+        private ExpressionSyntax ParseAssignmentExpression()
+        {
+            if(Peek(0).Kind == SyntaxKind.IdentifierToken && 
+            Peek(1).Kind == SyntaxKind.EqualsEqualsToken)
+            {
+                var identifierToken = NextToken();
+                var equalsToken = NextToken();
+                var right = ParseAssignmentExpression();
+                return new AssignmentExpressionSyntax(identifierToken, equalsToken, right);
+            }   
+        }*/
         private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
             ExpressionSyntax left;
@@ -79,7 +88,6 @@ namespace Kadda.CodeAnalysis.Syntax
                 left = ParsePrimaryExpression();
             }
 
-
             while(true)
             {
                 var precedence = Current.Kind.GetBinaryOperatorPrecedence();
@@ -93,6 +101,7 @@ namespace Kadda.CodeAnalysis.Syntax
 
             return left;
         }
+
         private ExpressionSyntax ParsePrimaryExpression()
         {
             switch (Current.Kind)

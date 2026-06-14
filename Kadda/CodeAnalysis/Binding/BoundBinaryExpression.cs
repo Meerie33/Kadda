@@ -8,7 +8,7 @@ namespace Kadda.CodeAnalysis.Binding
             Op = op;
             Right = right;
         }
-        public override BoundNodeKind Kind => BoundNodeKind.UnaryExpression;
+        public override BoundNodeKind Kind => BoundNodeKind.BinaryExpression;
         public override Type Type => Op.ResultType;
 
         public BoundExpression Left { get; }

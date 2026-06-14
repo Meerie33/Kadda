@@ -1,8 +1,8 @@
 namespace Kadda.CodeAnalysis.Syntax
 {
-    public sealed class NameExressionSyntax : ExpressionSyntax
+    public sealed class NameExpressionSyntax : ExpressionSyntax
     {
-        public NameExressionSyntax(SyntaxToken identifierToken)
+        public NameExpressionSyntax(SyntaxToken identifierToken)
         {
             IdentifierToken = identifierToken;
         }
