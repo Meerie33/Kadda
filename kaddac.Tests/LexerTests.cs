@@ -52,9 +52,9 @@ public class LexerTests
             (SyntaxKind.OpenParenthesisToken, "("),
             (SyntaxKind.CloseParenthesisToken, ")"),
 
-            (SyntaxKind.IndentifierToken, "x"),
-            (SyntaxKind.IndentifierToken, "a"),
-            (SyntaxKind.IndentifierToken, "abc"),
+            (SyntaxKind.IdentifierToken, "x"),
+            (SyntaxKind.IdentifierToken, "a"),
+            (SyntaxKind.IdentifierToken, "abc"),
             (SyntaxKind.TrueKeyword, "true"),
             (SyntaxKind.FalseKeyword, "false")
         };

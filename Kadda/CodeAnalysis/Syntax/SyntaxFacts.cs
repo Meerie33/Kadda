@@ -9,6 +9,7 @@ namespace Kadda.CodeAnalysis.Syntax
                 case SyntaxKind.PlusToken:
                 case SyntaxKind.MinusToken:
                 case SyntaxKind.BangToken:
+                case SyntaxKind.EqualsToken:
                     return 6;
 
 
@@ -24,6 +25,7 @@ namespace Kadda.CodeAnalysis.Syntax
                 case SyntaxKind.SlashToken:
                     return 5;
 
+                case SyntaxKind.EqualsToken:
                 case SyntaxKind.PlusToken:
                 case SyntaxKind.MinusToken:
                     return 4;
@@ -53,7 +55,7 @@ namespace Kadda.CodeAnalysis.Syntax
                     return SyntaxKind.FalseKeyword;
 
                 default:
-                    return SyntaxKind.IndentifierToken;
+                    return SyntaxKind.IdentifierToken;
             }
         }
     }

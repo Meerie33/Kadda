@@ -11,7 +11,7 @@ namespace Kadda.CodeAnalysis
         }
 
         public SyntaxTree Syntax { get; }
-        public EvaluationResult Evaluate(Dictionary<string, object> variables)
+        public EvaluationResult Evaluate(Dictionary<VariableSymbol, object> variables)
         {
             var binder = new Binder(variables);
             var boundExpression = binder.BindExpression(Syntax.Root);

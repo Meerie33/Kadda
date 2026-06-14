@@ -12,6 +12,7 @@ namespace Kadda.CodeAnalysis.Syntax
         StarToken,
         SlashToken,
         BangToken,
+        EqualsToken,
         AmpersandAmpersandToken,
         PipePipeToken,
         EqualsEqualsToken,
@@ -19,7 +20,7 @@ namespace Kadda.CodeAnalysis.Syntax
 
         OpenParenthesisToken,
         CloseParenthesisToken,
-        IndentifierToken,
+        IdentifierToken,
 
         //Keyword
         TrueKeyword,

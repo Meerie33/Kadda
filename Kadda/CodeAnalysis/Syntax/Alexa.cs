@@ -116,6 +116,11 @@ namespace Kadda.CodeAnalysis.Syntax
                         _position += 2;
                         return new SyntaxToken(SyntaxKind.EqualsEqualsToken, start, "==", null);
                     }
+                    else
+                    {
+                        _position += 1;
+                        return new SyntaxToken(SyntaxKind.EqualsToken, start, "=", null);
+                    }
                     break;
                 case '!':
                     if (Lookahead == '=')

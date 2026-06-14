@@ -12,7 +12,7 @@ namespace Kadda
         private static void Main()
         {
             var showTree = false;
-            var variables = new Dictionary<string, object>();
+            var variables = new Dictionary<VariableSymbol, object>();
             while(true)
             {
                 Console.Write(">> ");
@@ -21,7 +21,7 @@ namespace Kadda
                 if(string.IsNullOrWhiteSpace(line))
                     return;
 
-                if(line == ">showTree")
+                if(line == "#showTree")
                 {
                     showTree = !showTree;
                     Console.WriteLine(showTree ? "Showing parse trees." : "Not showing parse trees");
@@ -65,7 +65,7 @@ namespace Kadda
                         var error = line.Substring(diagnostic.Span.Start, diagnostic.Span.Length);
                         var suffix = line.Substring(diagnostic.Span.End);
 
-                         Console.Write("   ");
+                        Console.Write("   ");
                         Console.Write(prefix);
 
                         Console.ForegroundColor = ConsoleColor.DarkRed;
